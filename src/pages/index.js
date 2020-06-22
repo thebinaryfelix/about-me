@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography, CssBaseline } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import React from 'react'
 import yellowRoad from '../images/background.svg'
@@ -18,6 +18,7 @@ const useStyles = makeStyles(() => ({
   },
   profilePic: {
     minWidth: '167px',
+    maxWidth: '100%',
     borderRadius: '50%',
     border: '2px solid transparent',
     backgroundOrigin: 'border-box',
@@ -34,7 +35,7 @@ const IndexPage = () => {
   const classes = useStyles()
 
   return (
-    <>
+    <CssBaseline>
       <div style={{ height: '40px', width: '100%' }} />
       <Grid container className={classes.root}>
         <Grid item xs={12}>
@@ -45,7 +46,7 @@ const IndexPage = () => {
             className={classes.background}
           />
         </Grid>
-        <Grid item container justify="center" xs={12} >
+        <Grid item container justify="center" xs={12}>
           <Grid item className={classes.profilePicContainer} xs={7}>
             <img
               alt="imagem de perfil"
@@ -55,12 +56,14 @@ const IndexPage = () => {
           </Grid>
           <Grid item container className={classes.personNameContainer} xs={12}>
             <Grid item xs={6}>
-              <Typography variant="h3" align="right">Mateus Félix</Typography>
+              <Typography variant="h3" align="right" color="primary">
+                Mateus Félix
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </>
+    </CssBaseline>
   )
 }
 
