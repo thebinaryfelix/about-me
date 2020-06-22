@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import React from 'react'
 import yellowRoad from '../images/background.svg'
@@ -9,13 +9,24 @@ const useStyles = makeStyles(() => ({
     position: 'relative',
   },
   background: {
-    margin: 0,
     position: 'absolute',
+    margin: 0,
     zIndex: -1,
+  },
+  profilePicContainer: {
+    paddingTop: 10,
   },
   profilePic: {
     minWidth: '167px',
     borderRadius: '50%',
+    border: '2px solid transparent',
+    backgroundOrigin: 'border-box',
+    backgroundClip: 'content-box, border-box',
+    backgroundImage:
+      'linear-gradient(white, white), linear-gradient(120deg, #D1A603, #F8C404)',
+  },
+  personNameContainer: {
+    marginTop: 40,
   },
 }))
 
@@ -27,11 +38,25 @@ const IndexPage = () => {
       <div style={{ height: '40px', width: '100%' }} />
       <Grid container className={classes.root}>
         <Grid item xs={12}>
-          <img width="100%" src={yellowRoad} className={classes.background} />
+          <img
+            alt=""
+            width="100%"
+            src={yellowRoad}
+            className={classes.background}
+          />
         </Grid>
-        <Grid container item xs={12} justify="center">
-          <Grid item xs={4}>
-            <img src={profilePic} className={classes.profilePic} />
+        <Grid item container justify="center" xs={12} >
+          <Grid item className={classes.profilePicContainer} xs={7}>
+            <img
+              alt="imagem de perfil"
+              src={profilePic}
+              className={classes.profilePic}
+            />
+          </Grid>
+          <Grid item container className={classes.personNameContainer} xs={12}>
+            <Grid item xs={6}>
+              <Typography variant="h3" align="right">Mateus Félix</Typography>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
