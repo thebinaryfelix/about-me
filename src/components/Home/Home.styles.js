@@ -4,10 +4,12 @@ export default makeStyles(
   theme => {
     const primaryColor = theme.palette.primary.main
     const secondaryColor = theme.palette.secondary.main
+
     return {
       root: {
         minWidth: 320,
         position: 'relative',
+        paddingBottom: theme.spacing(3),
       },
       background: {
         position: 'absolute',
@@ -28,19 +30,9 @@ export default makeStyles(
       },
       personNameContainer: {
         marginTop: theme.spacing(7),
-      },
-      profileDescription: {
-        marginTop: theme.spacing(10),
-        paddingRight: theme.spacing(5),
-        textAlign: 'right',
-      },
-      githubIcon: {
-        fontSize: theme.typography.pxToRem(50),
-        color: secondaryColor,
-      },
-      linkedinIcon: {
-        fontSize: theme.typography.pxToRem(60),
-        color: secondaryColor,
+        [theme.breakpoints.up('sm')]: {
+          marginTop: theme.spacing(10),
+        },
       },
     }
   },
