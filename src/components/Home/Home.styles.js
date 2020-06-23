@@ -1,4 +1,7 @@
 import { makeStyles } from '@material-ui/styles'
+import profilePic from './images/profilePic.jpg'
+
+const profileImgBorder = 5
 
 export default makeStyles(
   theme => {
@@ -6,6 +9,14 @@ export default makeStyles(
     const secondaryColor = theme.palette.secondary.main
 
     return {
+      '@keyframes spin': {
+        '0%': {
+          transform: 'rotate(0deg)',
+        },
+        '100%': {
+          transform: 'rotate(720deg)',
+        },
+      },
       root: {
         minWidth: 320,
         position: 'relative',
@@ -17,19 +28,26 @@ export default makeStyles(
         zIndex: -1,
       },
       profilePicContainer: {
-        paddingTop: theme.spacing(1),
-      },
-      profilePic: {
-        minWidth: '167px',
-        maxWidth: '100%',
-        borderRadius: '50%',
-        border: `${theme.shape.borderRadius * 0.5}px solid transparent`,
-        backgroundOrigin: 'border-box',
-        backgroundClip: 'content-box, border-box',
-        backgroundImage: `linear-gradient(white, white), linear-gradient(120deg, ${primaryColor}, ${secondaryColor})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundImage: `url(${profilePic})`,
+        '&:before': {
+          zIndex: -1,
+          content: '""',
+          position: 'absolute',
+          width: ({ profileImageWidth }) =>
+            profileImageWidth + profileImgBorder,
+          height: ({ profileImageWidth }) =>
+            profileImageWidth + profileImgBorder,
+          borderRadius: '50%',
+          animation: '$spin linear 3s infinite',
+          backgroundOrigin: 'border-box',
+          backgroundImage: `linear-gradient(45deg, ${primaryColor}, ${secondaryColor})`,
+        },
       },
       personNameContainer: {
-        marginTop: theme.spacing(7),
+        margin: theme.spacing(5, 0),
         [theme.breakpoints.up('sm')]: {
           marginTop: theme.spacing(10),
         },
