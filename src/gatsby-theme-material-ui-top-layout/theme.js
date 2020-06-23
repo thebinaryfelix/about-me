@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 
-export default createMuiTheme({
+const theme = createMuiTheme({
   spacing: 8,
   typography: {
     fontSize: 12,
@@ -24,3 +24,9 @@ export default createMuiTheme({
     },
   },
 })
+
+theme.typography.h4 = {
+  fontSize: '1.7rem',
+}
+
+export default theme
