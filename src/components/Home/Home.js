@@ -27,7 +27,7 @@ const Home = () => {
         </Grid>
         <Grid item container className={classes.personNameContainer} xs={12}>
           <Grid item xs={6}>
-            <Typography variant="h3" align="right" color="primary">
+            <Typography variant="h3" align="right" color="secondary">
               Mateus Félix
             </Typography>
           </Grid>

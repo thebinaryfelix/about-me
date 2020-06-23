@@ -1,8 +1,18 @@
 module.exports = {
-  plugins: [`gatsby-theme-material-ui`],
   siteMetadata: {
-    title: `Mateus Felix Profile`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: 'Mateus Felix Web Developer',
+    description: 'Profile page for Mateus Felix',
+    author: '@thebinaryfelix - Mateus Felix',
   },
+  plugins: [
+    `gatsby-theme-material-ui`,
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Comfortaa'],
+        },
+      },
+    },
+  ],
 }
