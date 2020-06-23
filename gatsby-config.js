@@ -5,7 +5,7 @@ module.exports = {
     author: '@thebinaryfelix - Mateus Felix',
   },
   plugins: [
-    `gatsby-theme-material-ui`,
+    'gatsby-theme-material-ui',
     {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
