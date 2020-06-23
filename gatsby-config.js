@@ -14,5 +14,17 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'Mateus Felix',
+        short_name: 'Mateus Felix',
+        start_url: '/',
+        background_color: '#FFECAE',
+        theme_color: '#8800FF',
+        display: 'standalone',
+        icon: 'src/images/favicon.png',
+      },
+    },
   ],
 }
