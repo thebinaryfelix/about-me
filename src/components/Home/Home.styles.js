@@ -20,7 +20,6 @@ export default makeStyles(
       root: {
         minWidth: 320,
         position: 'relative',
-        paddingBottom: theme.spacing(3),
       },
       background: {
         position: 'absolute',

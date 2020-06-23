@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/styles'
-import backgroundXs from './images/backgroundXs.svg'
+import background from './images/background.svg'
 
 export default makeStyles(
   theme => {
@@ -10,7 +10,7 @@ export default makeStyles(
         backgroundSize: 'contain',
         backgroundPosition: 'right',
         backgroundRepeat: 'no-repeat',
-        backgroundImage: `url(${backgroundXs})`,
+        backgroundImage: `url(${background})`,
       },
       githubIcon: {
         fontSize: theme.typography.pxToRem(40),
