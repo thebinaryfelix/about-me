@@ -11,14 +11,24 @@ export default makeStyles(
         backgroundPosition: 'right',
         backgroundRepeat: 'no-repeat',
         backgroundImage: `url(${background})`,
+        [theme.breakpoints.up('sm')]: {
+          backgroundSize: 'contain',
+        },
+      },
+      iconColor: {
+        color: secondaryColor,
       },
       githubIcon: {
         fontSize: theme.typography.pxToRem(40),
-        color: secondaryColor,
+        [theme.breakpoints.up('sm')]: {
+          fontSize: theme.typography.pxToRem(50),
+        },
       },
       linkedinIcon: {
         fontSize: theme.typography.pxToRem(50),
-        color: secondaryColor,
+        [theme.breakpoints.up('sm')]: {
+          fontSize: theme.typography.pxToRem(60),
+        },
       },
     }
   },

@@ -1,4 +1,5 @@
 import { Box, Link, Typography } from '@material-ui/core'
+import clsx from 'clsx'
 import React from 'react'
 import LinkedinIcon from '@material-ui/icons/LinkedIn'
 import GithubIcon from '@material-ui/icons/GitHub'
@@ -8,21 +9,31 @@ const ProfileDescription = () => {
   const classes = useStyles()
 
   return (
-    <Box p={5} maxWidth={350} textAlign="right" className={classes.root}>
+    <Box
+      p={{ xs: 5, sm: 7 }}
+      maxWidth={{ xs: 350, sm: 500 }}
+      textAlign="right"
+      className={classes.root}
+    >
       <Box
         width={1}
+        mb={{ sm: 2 }}
         display="flex"
         alignItems="center"
         justifyContent="flex-end"
       >
         <Box mr={1}>
           <Link href="https://github.com/thebinaryfelix" target="_blank">
-            <GithubIcon className={classes.githubIcon} />
+            <GithubIcon
+              className={clsx([classes.iconColor, classes.githubIcon])}
+            />
           </Link>
         </Box>
         <Box>
           <Link href="https://www.linkedin.com/in/mateusfelix/" target="_blank">
-            <LinkedinIcon className={classes.linkedinIcon} />
+            <LinkedinIcon
+              className={clsx([classes.iconColor, classes.linkedinIcon])}
+            />
           </Link>
         </Box>
       </Box>

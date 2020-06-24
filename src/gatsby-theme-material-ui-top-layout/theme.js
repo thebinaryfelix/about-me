@@ -29,7 +29,7 @@ theme.typography.h1 = {
   fontWeight: 'normal',
   fontSize: '2.0rem',
   [theme.breakpoints.up('sm')]: {
-    fontSize: '3.9rem',
+    fontSize: '3.0rem',
   },
 }
 
@@ -44,6 +44,13 @@ theme.typography.h5 = {
   fontSize: '1.0rem',
   [theme.breakpoints.up('sm')]: {
     fontSize: '1.5rem',
+  },
+}
+
+theme.typography.caption = {
+  fontSize: '0.6rem',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '0.8rem',
   },
 }
 
