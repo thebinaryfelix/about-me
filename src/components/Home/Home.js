@@ -1,23 +1,45 @@
 import { Box, Grid, Typography } from '@material-ui/core'
+import { useStaticQuery, graphql } from 'gatsby'
 import React, { useEffect, useState } from 'react'
-import { useBreakpoint } from '../../utils'
-import ProfileDescription from '../ProfileDescription'
+import { useBreakpoint } from 'utils'
+import ProfileDescription from 'components/ProfileDescription'
 import useStyles from './Home.styles'
 
 const imgSizes = {
   xs: 200,
   sm: 250,
   md: 300,
+  lg: 300,
+  xl: 300,
 }
 
+const query = graphql`
+  query {
+    imgOrigin: file(relativePath: { eq: "profilePic.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 300) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
+
 const Home = () => {
-  const [profileImageWidth, setProfileImageWidth] = useState(200)
-  const classes = useStyles({ profileImageWidth })
+  const profilePic = useStaticQuery(query)
+
   const breakpoint = useBreakpoint()
+  const [profileImageWidth, setProfileImageWidth] = useState(
+    imgSizes[breakpoint],
+  )
+  const classes = useStyles({
+    profileImageWidth,
+    imgSrc: profilePic.imgOrigin.childImageSharp.fluid.src,
+  })
 
   useEffect(() => {
     setProfileImageWidth(imgSizes[breakpoint] || profileImageWidth)
-  }, breakpoint)
+  }, [breakpoint])
 
   return (
     <Grid container className={classes.root}>

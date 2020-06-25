@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/styles'
-import profilePic from './images/profilePic.jpg'
 
 const profileImgBorder = 5
 
@@ -30,7 +29,7 @@ export default makeStyles(
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundImage: `url(${profilePic})`,
+        backgroundImage: ({ imgSrc }) => `url(${imgSrc})`,
         '&:before': {
           zIndex: -1,
           content: '""',

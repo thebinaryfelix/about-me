@@ -4,8 +4,11 @@ import { useTheme } from '@material-ui/core'
 const useBreakpoint = () => {
   const theme = useTheme()
   const getBreakpoint = useCallback(() => {
-    // eslint-disable-next-line no-undef
-    const width = window.innerWidth || 0
+    let width = 0
+    if (typeof window !== 'undefined') {
+      // eslint-disable-next-line no-undef
+      width = window.innerWidth
+    }
     const { keys } = theme.breakpoints || []
     return keys.reduce(
       (current, key) =>
