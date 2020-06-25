@@ -4,10 +4,20 @@
   "plugins": ["prettier"],
   "parserOptions": {
     "ecmaVersion": 9,
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "rules": {
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }]
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {
+        "cwd": "./"
+      }
+    }
   }
 }
