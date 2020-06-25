@@ -1,8 +1,8 @@
 import { Box, Grid, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
-import useStyles from './Home.styles'
 import { useBreakpoint } from '../../utils'
 import ProfileDescription from '../ProfileDescription'
+import useStyles from './Home.styles'
 
 const imgSizes = {
   xs: 200,

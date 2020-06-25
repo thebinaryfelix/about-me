@@ -1,8 +1,8 @@
 import { Box, Link, Typography } from '@material-ui/core'
-import clsx from 'clsx'
 import React from 'react'
-import LinkedinIcon from '@material-ui/icons/LinkedIn'
+import clsx from 'clsx'
 import GithubIcon from '@material-ui/icons/GitHub'
+import LinkedinIcon from '@material-ui/icons/LinkedIn'
 import useStyles from './ProfileDescription.styles'
 
 const ProfileDescription = () => {
