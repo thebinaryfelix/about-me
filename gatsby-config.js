@@ -1,14 +1,31 @@
+const fs = require('fs')
 const path = require('path')
+
+const { ENVIRONMENT = 'dev' } = process.env
+process.env.GATSBY_ENV = ENVIRONMENT
+
+const dotenvFile = `.env.${ENVIRONMENT}`
+
+if (fs.existsSync(dotenvFile)) {
+  // eslint-disable-next-line global-require
+  require('dotenv').config({
+    path: dotenvFile,
+  })
+}
+
+const siteUrl = process.env.GATSBY_SITE_URL
 
 module.exports = {
   siteMetadata: {
-    title: `Mateus Felix Web Developer`,
-    description: `Profile page for Mateus Felix`,
+    title: `Mateus Felix`,
+    description: `Personal branding website`,
     author: `@thebinaryfelix - Mateus Felix`,
-    siteUrl: `https://thebinaryfelix.me`,
+    image: `/assets/images/socialBanner.jpg`,
+    siteUrl,
   },
   pathPrefix: '/',
   plugins: [
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-sitemap`,
     },
