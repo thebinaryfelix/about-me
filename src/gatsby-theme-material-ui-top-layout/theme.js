@@ -11,7 +11,7 @@ const theme = createMuiTheme({
       light: '#fff54f',
       main: '#ffc300',
       dark: '#c79300',
-      contrastText: '#000',
+      contrastText: '#8800ff',
     },
     secondary: {
       light: '#c14eff',
@@ -25,8 +25,33 @@ const theme = createMuiTheme({
   },
 })
 
+theme.typography.h1 = {
+  fontWeight: 'normal',
+  fontSize: '2.0rem',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '3.0rem',
+  },
+}
+
 theme.typography.h4 = {
-  fontSize: '1.7rem',
+  fontSize: '1.3rem',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '2.1rem',
+  },
+}
+
+theme.typography.h5 = {
+  fontSize: '1.0rem',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '1.5rem',
+  },
+}
+
+theme.typography.caption = {
+  fontSize: '0.6rem',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '0.8rem',
+  },
 }
 
 export default theme

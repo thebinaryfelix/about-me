@@ -1,11 +1,10 @@
 import React from 'react'
-import { Home } from '../components'
+import { Home, Layout } from '../components'
 
 const IndexPage = () => (
-  <>
-    <div style={{ height: '40px', width: '100%' }} />
+  <Layout>
     <Home />
-  </>
+  </Layout>
 )
 
 export default IndexPage

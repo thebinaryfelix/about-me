@@ -1,80 +1,76 @@
-import { Box, Container, Grid, Link, Typography } from '@material-ui/core'
-import React from 'react'
-import yellowRoad from './images/background.svg'
-import profilePic from './images/profilePic.jpg'
-import LinkedinIcon from '@material-ui/icons/LinkedIn'
-import GithubIcon from '@material-ui/icons/GitHub'
+import { Box, Grid, Typography } from '@material-ui/core'
+import { useStaticQuery, graphql } from 'gatsby'
+import React, { useEffect, useState } from 'react'
+import { useBreakpoint } from 'utils'
+import ProfileDescription from 'components/ProfileDescription'
 import useStyles from './Home.styles'
 
+const imgSizes = {
+  xs: 200,
+  sm: 250,
+  md: 300,
+  lg: 300,
+  xl: 300,
+}
+
+const query = graphql`
+  query {
+    imgOrigin: file(relativePath: { eq: "profilePic.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 300) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
+
 const Home = () => {
-  const classes = useStyles()
+  const profilePic = useStaticQuery(query)
+
+  const breakpoint = useBreakpoint()
+  const [profileImageWidth, setProfileImageWidth] = useState(
+    imgSizes[breakpoint],
+  )
+  const classes = useStyles({
+    profileImageWidth,
+    imgSrc: profilePic.imgOrigin.childImageSharp.fluid.src,
+  })
+
+  useEffect(() => {
+    setProfileImageWidth(imgSizes[breakpoint] || profileImageWidth)
+  }, [breakpoint])
 
   return (
-    <Container>
-      <Grid container className={classes.root}>
-        <Grid item xs={12}>
-          <img
-            alt=""
-            width="100%"
-            src={yellowRoad}
-            className={classes.background}
-          />
+    <Grid container className={classes.root}>
+      <Grid item container justify="center" xs={12}>
+        <Box
+          width={profileImageWidth}
+          height={profileImageWidth}
+          position="relative"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          borderRadius="50%"
+          className={classes.profilePicContainer}
+        />
+        <Grid item className={classes.personNameContainer} xs={12}>
+          <Grid item xs={12}>
+            <Typography
+              variant="h1"
+              align="center"
+              color="secondary"
+              style={{ fontWeight: 'bold' }}
+            >
+              Mateus Félix
+            </Typography>
+          </Grid>
         </Grid>
         <Grid item container justify="center" xs={12}>
-          <Grid item className={classes.profilePicContainer} xs={7}>
-            <img alt="" src={profilePic} className={classes.profilePic} />
-          </Grid>
-          <Grid item container className={classes.personNameContainer} xs={12}>
-            <Grid item xs={6}>
-              <Typography variant="h3" align="right" color="secondary">
-                Mateus Félix
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid
-            item
-            container
-            justify="flex-end"
-            className={classes.profileDescription}
-            xs={12}
-          >
-            <Grid item xs={8}>
-              <Box
-                width={1}
-                display="flex"
-                alignItems="center"
-                justifyContent="flex-end"
-              >
-                <Box mr={2}>
-                  <Link
-                    href="https://github.com/thebinaryfelix"
-                    target="_blank"
-                  >
-                    <GithubIcon className={classes.githubIcon} />
-                  </Link>
-                </Box>
-                <Box>
-                  <Link
-                    href="https://www.linkedin.com/in/mateusfelix/"
-                    target="_blank"
-                  >
-                    <LinkedinIcon className={classes.linkedinIcon} />
-                  </Link>
-                </Box>
-              </Box>
-              <Box my={2}>
-                <Typography variant="h4" color="secondary">
-                  Web Developer
-                </Typography>
-              </Box>
-              <Typography variant="h5" component="p" color="secondary">
-                I build web applications and contribute to open-source projects
-              </Typography>
-            </Grid>
-          </Grid>
+          <ProfileDescription />
         </Grid>
       </Grid>
-    </Container>
+    </Grid>
   )
 }
 
