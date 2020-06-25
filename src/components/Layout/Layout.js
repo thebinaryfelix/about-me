@@ -12,7 +12,7 @@ const Navigation = () => (
   <Box p={3} display="flex" alignItems="center" justifyContent="space-between">
     <Breadcrumbs>
       {breadcrumbs.map(item => (
-        <Typography color="secondary" variant="subtitle1">
+        <Typography key={item.label} color="secondary" variant="subtitle1">
           {item.label}
         </Typography>
       ))}
