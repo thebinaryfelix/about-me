@@ -10,7 +10,7 @@ const breadcrumbs = [
 
 const Navigation = () => (
   <Box p={3} display="flex" alignItems="center" justifyContent="space-between">
-    <Breadcrumbs>
+    <Breadcrumbs role="navigation">
       {breadcrumbs.map(item => (
         <Typography key={item.label} color="secondary" variant="subtitle1">
           {item.label}

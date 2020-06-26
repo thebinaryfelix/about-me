@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/styles'
-import background from './images/background.svg'
+import background from 'assets/images/background.svg'
 
 export default makeStyles(
   theme => {

@@ -23,22 +23,34 @@ const ProfileDescription = () => {
         justifyContent="flex-end"
       >
         <Box mr={1}>
-          <Link href="https://github.com/thebinaryfelix" target="_blank">
+          <Link
+            href="https://github.com/thebinaryfelix"
+            rel="noopener referrer"
+            target="_blank"
+          >
             <GithubIcon
+              aria-hidden={false}
+              alt="Github profile link"
               className={clsx([classes.iconColor, classes.githubIcon])}
             />
           </Link>
         </Box>
         <Box>
-          <Link href="https://www.linkedin.com/in/mateusfelix/" target="_blank">
+          <Link
+            href="https://www.linkedin.com/in/mateusfelix/"
+            rel="noopener referrer"
+            target="_blank"
+          >
             <LinkedinIcon
+              aria-hidden={false}
+              alt="Linkedin profile link"
               className={clsx([classes.iconColor, classes.linkedinIcon])}
             />
           </Link>
         </Box>
       </Box>
       <Box my={1}>
-        <Typography variant="h4" color="secondary">
+        <Typography variant="h4" component="h2" color="secondary">
           Web Developer
         </Typography>
       </Box>

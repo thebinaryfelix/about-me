@@ -6,7 +6,6 @@ const useBreakpoint = () => {
   const getBreakpoint = useCallback(() => {
     let width = 0
     if (typeof window !== 'undefined') {
-      // eslint-disable-next-line no-undef
       width = window.innerWidth
     }
     const { keys } = theme.breakpoints || []
@@ -23,10 +22,8 @@ const useBreakpoint = () => {
   }, [getBreakpoint])
 
   useEffect(() => {
-    /* eslint-disable no-undef */
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-    /* eslint-enable no-undef */
   }, [handleResize])
 
   return breakpoint

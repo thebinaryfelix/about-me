@@ -1,8 +1,9 @@
 import React from 'react'
-import { Home, Layout } from '../components'
+import { Home, Layout, Meta } from '../components'
 
 const IndexPage = () => (
   <Layout>
+    <Meta title="About | Mateus Felix" />
     <Home />
   </Layout>
 )

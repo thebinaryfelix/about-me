@@ -1,31 +1,35 @@
+/* eslint-disable global-require */
 const fs = require('fs')
 const path = require('path')
 
 const { ENVIRONMENT = 'dev' } = process.env
 process.env.GATSBY_ENV = ENVIRONMENT
 
-const dotenvFile = `.env.${ENVIRONMENT}`
+const dotenvFiles = [`.env.${ENVIRONMENT}`, '.env']
 
-if (fs.existsSync(dotenvFile)) {
-  // eslint-disable-next-line global-require
-  require('dotenv').config({
-    path: dotenvFile,
-  })
-}
+dotenvFiles.forEach(dotenvFile => {
+  if (fs.existsSync(dotenvFile)) {
+    require('dotenv-expand')(
+      require('dotenv').config({
+        path: dotenvFile,
+      }),
+    )
+  }
+})
 
 const siteUrl = process.env.GATSBY_SITE_URL
 
 module.exports = {
   siteMetadata: {
     title: `Mateus Felix`,
-    description: `Personal branding website`,
-    author: `@thebinaryfelix - Mateus Felix`,
-    image: `/assets/images/socialBanner.jpg`,
+    description: `Web Developer`,
+    author: `Mateus Felix`,
     siteUrl,
   },
   pathPrefix: '/',
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-preload-fonts`,
     {
       resolve: `gatsby-plugin-sitemap`,
     },
@@ -37,18 +41,10 @@ module.exports = {
             google: [
               {
                 family: `Comfortaa`,
-                variants: [`300`, `400`, `500`],
+                variants: [`300`, `600`, `700`],
               },
             ],
           },
-        },
-      },
-    },
-    {
-      resolve: `gatsby-plugin-web-font-loader`,
-      options: {
-        google: {
-          families: ['Comfortaa'],
         },
       },
     },
@@ -60,7 +56,14 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        useMozJpeg: false,
+        stripMetadata: true,
+        defaultQuality: 100,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -71,6 +74,20 @@ module.exports = {
         theme_color: `#8800FF`,
         display: `standalone`,
         icon: `src/assets/images/favicon.png`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: siteUrl,
+        sitemap: `${siteUrl}/sitemap.xml`,
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-html-attributes',
+      options: {
+        lang: 'en',
       },
     },
   ],

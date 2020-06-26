@@ -3,7 +3,8 @@
   "extends": ["airbnb", "prettier", "plugin:prettier/recommended"],
   "plugins": ["prettier"],
   "env": {
-    "jest": true
+    "jest": true,
+    "browser": true
   },
   "parserOptions": {
     "ecmaVersion": 9,

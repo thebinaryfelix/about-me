@@ -1,24 +1,16 @@
-import { Box, Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { useStaticQuery, graphql } from 'gatsby'
-import { useBreakpoint } from 'utils'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import Img from 'gatsby-image'
 import ProfileDescription from 'components/ProfileDescription'
 import useStyles from './Home.styles'
 
-const imgSizes = {
-  xs: 200,
-  sm: 250,
-  md: 300,
-  lg: 300,
-  xl: 300,
-}
-
 const query = graphql`
   query {
-    imgOrigin: file(relativePath: { eq: "profilePic.jpg" }) {
+    profileImage: file(relativePath: { eq: "profile.webp" }) {
       childImageSharp {
-        fluid(maxWidth: 300) {
-          ...GatsbyImageSharpFluid
+        fluid(maxWidth: 1200) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
@@ -26,45 +18,29 @@ const query = graphql`
 `
 
 const Home = () => {
-  const profilePic = useStaticQuery(query)
-
-  const breakpoint = useBreakpoint()
-  const [profileImageWidth, setProfileImageWidth] = useState(
-    imgSizes[breakpoint],
-  )
-  const classes = useStyles({
-    profileImageWidth,
-    imgSrc: profilePic.imgOrigin.childImageSharp.fluid.src,
-  })
-
-  useEffect(() => {
-    setProfileImageWidth(imgSizes[breakpoint] || profileImageWidth)
-  }, [breakpoint])
+  const imgData = useStaticQuery(query)
+  const classes = useStyles({})
 
   return (
     <Grid container className={classes.root}>
       <Grid item container justify="center" xs={12}>
-        <Box
-          width={profileImageWidth}
-          height={profileImageWidth}
-          position="relative"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          borderRadius="50%"
-          className={classes.profilePicContainer}
-        />
-        <Grid item className={classes.personNameContainer} xs={12}>
-          <Grid item xs={12}>
-            <Typography
-              variant="h1"
-              align="center"
-              color="secondary"
-              style={{ fontWeight: 'bold' }}
-            >
-              Mateus Félix
-            </Typography>
-          </Grid>
+        <Grid item xs={5} md={3}>
+          <Img
+            alt=""
+            title="Profile image"
+            style={{ borderRadius: '50%' }}
+            fluid={imgData.profileImage.childImageSharp.fluid}
+          />
+        </Grid>
+        <Grid item xs={12} className={classes.nameContainer}>
+          <Typography
+            variant="h1"
+            align="center"
+            color="secondary"
+            style={{ fontWeight: 'bold' }}
+          >
+            Mateus Félix
+          </Typography>
         </Grid>
         <Grid item container justify="center" xs={12}>
           <ProfileDescription />

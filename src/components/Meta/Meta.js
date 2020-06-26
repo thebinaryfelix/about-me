@@ -16,35 +16,25 @@ const querySeo = graphql`
   }
 `
 
-const Meta = ({ title, description, image, article }) => {
+const Meta = ({ title, description }) => {
   const { pathname } = useLocation()
   const { site } = useStaticQuery(querySeo)
 
-  const {
-    defaultDescription,
-    defaultImage,
-    defaultTitle,
-    siteUrl,
-  } = site.siteMetadata
+  const { defaultDescription, defaultTitle, siteUrl } = site.siteMetadata
 
   const seoProps = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    image: `${siteUrl}${image || defaultImage}`,
+    image: `${siteUrl}/socialBanner.webp`,
     url: `${siteUrl}${pathname}`,
   }
 
   return (
-    <Helmet title={seoProps.title} titleTemplate="%s | Mateus Felix">
+    <Helmet title={seoProps.title}>
       <meta name="description" content={seoProps.description} />
-      <meta name="image" content={seoProps.image} />
-      {article ? <meta property="og:type" content="article" /> : null}
-
-      {Object.keys(seoProps).map(key =>
-        seoProps[key] ? (
-          <meta key={key} property={`og:${key}`} content={seoProps[key]} />
-        ) : null,
-      )}
+      {Object.keys(seoProps).map(key => (
+        <meta key={key} property={`og:${key}`} content={seoProps[key]} />
+      ))}
     </Helmet>
   )
 }
@@ -54,13 +44,9 @@ export default Meta
 Meta.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  image: PropTypes.string,
-  article: PropTypes.bool,
 }
 
 Meta.defaultProps = {
   title: null,
   description: null,
-  image: null,
-  article: false,
 }
