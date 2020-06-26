@@ -1,13 +1,10 @@
 import React from 'react'
-import { Home, Layout, Meta } from '../components'
+import { Home, Layout } from '../components'
 
 const IndexPage = () => (
-  <>
-    <Meta title="About me" />
-    <Layout>
-      <Home />
-    </Layout>
-  </>
+  <Layout>
+    <Home />
+  </Layout>
 )
 
 export default IndexPage

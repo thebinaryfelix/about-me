@@ -1,2 +1,9 @@
 dist/
+public/
+.cache/
+
 node_modules/
+
+# tests
+*jest*
+setupTests.js

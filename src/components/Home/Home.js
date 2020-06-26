@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from '@material-ui/core'
 import { useStaticQuery, graphql } from 'gatsby'
-import React, { useEffect, useState } from 'react'
 import { useBreakpoint } from 'utils'
+import React, { useEffect, useState } from 'react'
 import ProfileDescription from 'components/ProfileDescription'
 import useStyles from './Home.styles'
 
