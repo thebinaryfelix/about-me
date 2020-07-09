@@ -1,19 +1,68 @@
 import { Box, Link, Typography } from '@material-ui/core'
 import React from 'react'
-import clsx from 'clsx'
-import GithubIcon from '@material-ui/icons/GitHub'
-import LinkedinIcon from '@material-ui/icons/LinkedIn'
-import useStyles from './ProfileDescription.styles'
+import styled from 'styled-components'
+import Github from '@material-ui/icons/GitHub'
+import Linkedin from '@material-ui/icons/LinkedIn'
+import bgYellow from 'assets/images/background.svg'
+
+const StyledProfileDescription = styled(Box)`
+  ${({ theme }) => `
+      background-size: contain;
+      background-position: right;
+      background-repeat: no-repeat;
+      background-image: url(${bgYellow});
+
+      ${[theme.breakpoints.up('sm')]} {
+        background-size: contain;
+      }
+    }
+  `}
+`
+
+const GithubIcon = styled(Github)`
+  ${({ theme }) => `
+    color: ${theme.palette.secondary.main};
+    font-size: ${theme.typography.pxToRem(40)};
+    
+    ${[theme.breakpoints.up('sm')]} {
+      font-size: ${theme.typography.pxToRem(50)};
+    }
+
+    transition: ${theme.transitions.create(['transform'], {
+      duration: theme.transitions.duration.short,
+    })};
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
+  `}
+`
+
+const LinkedinIcon = styled(Linkedin)`
+  ${({ theme }) => `
+    color: ${theme.palette.secondary.main};
+    font-size: ${theme.typography.pxToRem(50)};
+    
+    ${[theme.breakpoints.up('sm')]} {
+      font-size: ${theme.typography.pxToRem(60)};
+    }
+
+    transition: ${theme.transitions.create(['transform'], {
+      duration: theme.transitions.duration.short,
+    })};
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
+  `}
+`
 
 const ProfileDescription = () => {
-  const classes = useStyles()
-
   return (
-    <Box
+    <StyledProfileDescription
       p={{ xs: 5, sm: 7 }}
       maxWidth={{ xs: 350, sm: 500 }}
       textAlign="right"
-      className={classes.root}
     >
       <Box
         width={1}
@@ -28,11 +77,7 @@ const ProfileDescription = () => {
             rel="noopener referrer"
             target="_blank"
           >
-            <GithubIcon
-              aria-hidden={false}
-              alt="Github profile link"
-              className={clsx([classes.iconColor, classes.githubIcon])}
-            />
+            <GithubIcon aria-hidden={false} alt="Github profile link" />
           </Link>
         </Box>
         <Box>
@@ -41,11 +86,7 @@ const ProfileDescription = () => {
             rel="noopener referrer"
             target="_blank"
           >
-            <LinkedinIcon
-              aria-hidden={false}
-              alt="Linkedin profile link"
-              className={clsx([classes.iconColor, classes.linkedinIcon])}
-            />
+            <LinkedinIcon aria-hidden={false} alt="Linkedin profile link" />
           </Link>
         </Box>
       </Box>
@@ -57,7 +98,7 @@ const ProfileDescription = () => {
       <Typography variant="h5" component="p" color="secondary">
         I build web applications and contribute to open-source projects
       </Typography>
-    </Box>
+    </StyledProfileDescription>
   )
 }
 

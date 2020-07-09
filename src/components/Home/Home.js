@@ -1,9 +1,9 @@
 import { Grid, Typography } from '@material-ui/core'
 import { useStaticQuery, graphql } from 'gatsby'
+import styled from 'styled-components'
 import React from 'react'
 import Img from 'gatsby-image'
 import ProfileDescription from 'components/ProfileDescription'
-import useStyles from './Home.styles'
 
 const query = graphql`
   query {
@@ -17,12 +17,21 @@ const query = graphql`
   }
 `
 
+const NameContainer = styled(Grid)`
+  ${({ theme }) => `
+    margin: ${theme.spacing(5, 0)};
+
+    ${[theme.breakpoints.up('sm')]} {
+      margin-top: ${theme.spacing(10)}px;
+    }
+  `}
+`
+
 const Home = () => {
   const imgData = useStaticQuery(query)
-  const classes = useStyles({})
 
   return (
-    <Grid container className={classes.root}>
+    <Grid container>
       <Grid item container justify="center" xs={12}>
         <Grid item xs={5} md={3}>
           <Img
@@ -32,7 +41,7 @@ const Home = () => {
             fluid={imgData.profileImage.childImageSharp.fluid}
           />
         </Grid>
-        <Grid item xs={12} className={classes.nameContainer}>
+        <NameContainer item xs={12}>
           <Typography
             variant="h1"
             align="center"
@@ -41,7 +50,7 @@ const Home = () => {
           >
             Mateus Félix
           </Typography>
-        </Grid>
+        </NameContainer>
         <Grid item container justify="center" xs={12}>
           <ProfileDescription />
         </Grid>

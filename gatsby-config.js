@@ -28,26 +28,29 @@ module.exports = {
   },
   pathPrefix: '/',
   plugins: [
-    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-preload-fonts`,
     {
-      resolve: `gatsby-plugin-sitemap`,
-    },
-    {
-      resolve: `gatsby-theme-material-ui`,
+      resolve: 'gatsby-plugin-web-font-loader',
       options: {
-        webFontsConfig: {
-          fonts: {
-            google: [
-              {
-                family: `Comfortaa`,
-                variants: [`300`, `600`, `700`],
-              },
-            ],
-          },
+        google: {
+          families: [`Comfortaa:300,600,700`],
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+    },
+    `gatsby-plugin-top-layout`,
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+        },
+      },
+    },
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
