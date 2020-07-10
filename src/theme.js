@@ -33,6 +33,13 @@ theme.typography.h1 = {
   },
 }
 
+theme.typography.h3 = {
+  fontSize: '1.6rem',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '2.5rem',
+  },
+}
+
 theme.typography.h4 = {
   fontSize: '1.3rem',
   [theme.breakpoints.up('sm')]: {

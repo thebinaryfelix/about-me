@@ -28,7 +28,6 @@ module.exports = {
   },
   pathPrefix: '/',
   plugins: [
-    `gatsby-plugin-preload-fonts`,
     {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
@@ -37,9 +36,9 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-plugin-sitemap`,
-    },
+    `gatsby-plugin-minify`,
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-top-layout`,
     {
       resolve: `gatsby-plugin-material-ui`,
@@ -73,7 +72,7 @@ module.exports = {
         name: `Mateus Felix`,
         short_name: `Mateus Felix`,
         start_url: `/`,
-        background_color: `#FFECAE`,
+        background_color: `#FFF`,
         theme_color: `#8800FF`,
         display: `standalone`,
         icon: `src/assets/images/favicon.png`,
