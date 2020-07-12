@@ -36,7 +36,12 @@ module.exports = {
         },
       },
     },
-    `gatsby-plugin-minify`,
+    {
+      resolve: `gatsby-plugin-minify`,
+      options: {
+        removeComments: true,
+      },
+    },
     `gatsby-plugin-offline`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-top-layout`,

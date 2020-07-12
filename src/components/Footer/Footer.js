@@ -10,7 +10,7 @@ const Footer = () => (
     justifyContent="center"
     component="footer"
   >
-    <Typography variant="caption" color="secondary">
+    <Typography variant="caption" color="primary">
       © 2020
     </Typography>
   </Box>

@@ -1,6 +1,9 @@
 import { screen, render } from '@testing-library/react'
+import { withProviders } from 'utils'
 import React from 'react'
-import Layout from '../Layout'
+import BaseComponent from '../Layout'
+
+const Layout = withProviders(BaseComponent)
 
 describe('Layout', () => {
   test('should have 2 list items', () => {

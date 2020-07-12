@@ -1,28 +1,62 @@
-import { Grid, Typography } from '@material-ui/core'
+import { Box, Grid, Link, Typography } from '@material-ui/core'
 import { useStaticQuery, graphql } from 'gatsby'
-import styled from 'styled-components'
 import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import Img from 'gatsby-image'
-import ProfileDescription from 'components/ProfileDescription'
+import Github from '@material-ui/icons/GitHub'
+import Linkedin from '@material-ui/icons/LinkedIn'
 
 const query = graphql`
   query {
-    profileImage: file(relativePath: { eq: "profile.webp" }) {
+    profileImage: file(relativePath: { eq: "profile.jpeg" }) {
       childImageSharp {
         fluid(maxWidth: 1200) {
-          ...GatsbyImageSharpFluid_withWebp
+          ...GatsbyImageSharpFluid
         }
       }
     }
   }
 `
 
-const NameContainer = styled(Grid)`
-  ${({ theme }) => `
-    margin: ${theme.spacing(5, 0)};
+const StyledImage = styled(Img)`
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+`
 
+const SocialIcon = ({ className, Icon }) => <Icon className={className} />
+
+SocialIcon.propTypes = {
+  className: PropTypes.string.isRequired,
+  Icon: PropTypes.object.isRequired,
+}
+
+const StyledIcon = styled(SocialIcon)`
+  ${({ theme }) => `
+    color: ${theme.palette.primary.main};
+    transition: ${theme.transitions.create(['transform'], {
+      duration: theme.transitions.duration.short,
+    })};
+    &:hover {
+      transform: translateY(-8px);
+    }
+  `}
+`
+
+const GithubIcon = styled(StyledIcon)`
+  ${({ theme }) => `
+    font-size: ${theme.typography.pxToRem(50)};
     ${[theme.breakpoints.up('sm')]} {
-      margin-top: ${theme.spacing(10)}px;
+      font-size: ${theme.typography.pxToRem(70)};
+    }
+  `}
+`
+
+const LinkedinIcon = styled(StyledIcon)`
+  ${({ theme }) => `
+    font-size: ${theme.typography.pxToRem(65)};
+    ${[theme.breakpoints.up('sm')]} {
+      font-size: ${theme.typography.pxToRem(85)};
     }
   `}
 `
@@ -31,31 +65,75 @@ const Home = () => {
   const imgData = useStaticQuery(query)
 
   return (
-    <Grid container>
-      <Grid item container justify="center" xs={12}>
-        <Grid item xs={5} md={3}>
-          <Img
+    // Box to handle negative margin on Grid
+    <Box py={{ xs: 1, sm: 3 }} px={3}>
+      <Grid container spacing={3} justify="center">
+        <Grid item xs={5} sm={4} md={3}>
+          <StyledImage
             alt=""
             title="Profile image"
-            style={{ borderRadius: '50%' }}
             fluid={imgData.profileImage.childImageSharp.fluid}
           />
         </Grid>
-        <NameContainer item xs={12}>
-          <Typography
-            variant="h1"
-            align="center"
-            color="secondary"
-            style={{ fontWeight: 'bold' }}
-          >
+        <Grid item xs={12}>
+          <Typography variant="h1" align="center" color="primary">
             Mateus Félix
           </Typography>
-        </NameContainer>
-        <Grid item container justify="center" xs={12}>
-          <ProfileDescription />
+        </Grid>
+        <Grid
+          item
+          container
+          justify="space-around"
+          alignItems="center"
+          xs={6}
+          sm={5}
+          md={4}
+          lg={3}
+        >
+          <Grid item>
+            <Link
+              href="https://github.com/thebinaryfelix"
+              rel="noopener referrer"
+              target="_blank"
+            >
+              <GithubIcon
+                Icon={Github}
+                aria-hidden={false}
+                alt="Github profile link"
+              />
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link
+              href="https://www.linkedin.com/in/mateusfelix/"
+              rel="noopener referrer"
+              target="_blank"
+            >
+              <LinkedinIcon
+                Icon={Linkedin}
+                aria-hidden={false}
+                alt="Linkedin profile link"
+              />
+            </Link>
+          </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography
+            align="center"
+            variant="h4"
+            component="h2"
+            color="primary"
+          >
+            Front-end Developer
+          </Typography>
+        </Grid>
+        <Grid item xs={8} md={5}>
+          <Typography variant="h5" align="center" component="p" color="primary">
+            I build web applications and contribute to open-source projects
+          </Typography>
         </Grid>
       </Grid>
-    </Grid>
+    </Box>
   )
 }
 
