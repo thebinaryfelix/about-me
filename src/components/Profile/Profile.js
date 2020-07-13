@@ -1,23 +1,11 @@
 import { Box, Grid, Link, Typography } from '@material-ui/core'
-import { useStaticQuery, graphql } from 'gatsby'
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 import Github from '@material-ui/icons/GitHub'
 import Linkedin from '@material-ui/icons/LinkedIn'
-
-const query = graphql`
-  query {
-    profileImage: file(relativePath: { eq: "profile.jpeg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1200) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-  }
-`
+import useProfileImg from './useProfileImg'
 
 const StyledImage = styled(Img)`
   border-radius: 50%;
@@ -45,38 +33,44 @@ const StyledIcon = styled(SocialIcon)`
 
 const GithubIcon = styled(StyledIcon)`
   ${({ theme }) => `
-    font-size: ${theme.typography.pxToRem(50)};
-    ${[theme.breakpoints.up('sm')]} {
-      font-size: ${theme.typography.pxToRem(70)};
+    font-size: ${theme.typography.pxToRem(60)};
+    ${[theme.breakpoints.down('sm')]} {
+      font-size: ${theme.typography.pxToRem(50)};
+    }
+    ${[theme.breakpoints.down('xs')]} {
+      font-size: ${theme.typography.pxToRem(45)};
     }
   `}
 `
 
 const LinkedinIcon = styled(StyledIcon)`
   ${({ theme }) => `
-    font-size: ${theme.typography.pxToRem(65)};
-    ${[theme.breakpoints.up('sm')]} {
-      font-size: ${theme.typography.pxToRem(85)};
+    font-size: ${theme.typography.pxToRem(70)};
+    ${[theme.breakpoints.down('sm')]} {
+      font-size: ${theme.typography.pxToRem(60)};
+    }
+    ${[theme.breakpoints.down('xs')]} {
+      font-size: ${theme.typography.pxToRem(55)};
     }
   `}
 `
 
-const Home = () => {
-  const imgData = useStaticQuery(query)
+const Profile = () => {
+  const img = useProfileImg()
 
   return (
-    // Box to handle negative margin on Grid
-    <Box py={{ xs: 1, sm: 3 }} px={3}>
+    <Box py={{ xs: 1, sm: 3 }}>
       <Grid container spacing={3} justify="center">
-        <Grid item xs={5} sm={4} md={3}>
-          <StyledImage
-            alt=""
-            title="Profile image"
-            fluid={imgData.profileImage.childImageSharp.fluid}
-          />
+        <Grid item xs={6} sm={4} md={3}>
+          <StyledImage alt="" ariaHidden="true" fluid={img} />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h1" align="center" color="primary">
+          <Typography
+            variant="h2"
+            component="h1"
+            align="center"
+            color="primary"
+          >
             Mateus Félix
           </Typography>
         </Grid>
@@ -86,8 +80,7 @@ const Home = () => {
           justify="space-around"
           alignItems="center"
           xs={6}
-          sm={5}
-          md={4}
+          sm={4}
           lg={3}
         >
           <Grid item>
@@ -127,8 +120,8 @@ const Home = () => {
             Front-end Developer
           </Typography>
         </Grid>
-        <Grid item xs={8} md={5}>
-          <Typography variant="h5" align="center" component="p" color="primary">
+        <Grid item xs={10} md={5}>
+          <Typography variant="h6" align="center" component="p" color="primary">
             I build web applications and contribute to open-source projects
           </Typography>
         </Grid>
@@ -137,4 +130,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Profile

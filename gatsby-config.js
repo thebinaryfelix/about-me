@@ -22,12 +22,16 @@ const siteUrl = process.env.GATSBY_SITE_URL
 module.exports = {
   siteMetadata: {
     title: `Mateus Felix`,
-    description: `Web Developer`,
+    description: `Front-end Developer`,
     author: `Mateus Felix`,
     siteUrl,
   },
   pathPrefix: '/',
   plugins: [
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-top-layout`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
@@ -42,9 +46,6 @@ module.exports = {
         removeComments: true,
       },
     },
-    `gatsby-plugin-offline`,
-    `gatsby-plugin-sitemap`,
-    `gatsby-plugin-top-layout`,
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
@@ -54,7 +55,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-styled-components`,
-    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -95,6 +95,17 @@ module.exports = {
       resolve: 'gatsby-plugin-html-attributes',
       options: {
         lang: 'en',
+      },
+    },
+    {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: `GitHub`,
+        fieldName: `github`,
+        url: `https://api.github.com/graphql`,
+        headers: {
+          Authorization: `Bearer ${process.env.GATSBY_GITHUB_TOKEN}`,
+        },
       },
     },
   ],

@@ -1,10 +1,15 @@
 import React from 'react'
-import { Home, Layout, Meta } from '../components'
+import { Box } from '@material-ui/core'
+import { Profile, Layout, Meta, Projects } from '../components'
 
 const IndexPage = () => (
   <Layout>
     <Meta title="About | Mateus Felix" />
-    <Home />
+    {/* Apply padding to handle negative margin on Grids */}
+    <Box px={3}>
+      <Profile />
+      <Projects />
+    </Box>
   </Layout>
 )
 

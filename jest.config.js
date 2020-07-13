@@ -10,6 +10,7 @@ module.exports = {
     '/node_modules',
     '/utils',
     '/index.js',
+    '/__fixtures__'
   ],
   coverageThreshold: {
     global: {
