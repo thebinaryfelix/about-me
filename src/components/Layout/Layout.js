@@ -47,7 +47,7 @@ const Layout = ({ children }) => (
     </StyledNav>
     <StyledContainer>
       <Box
-        pt={{ xs: 12, sm: 15 }}
+        pt={12}
         minHeight="100vh"
         display="flex"
         flexDirection="column"

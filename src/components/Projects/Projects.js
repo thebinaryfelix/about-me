@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useTransition, animated } from 'react-spring'
-import { Box, Grid, Link, Paper, Typography } from '@material-ui/core'
+import VisibilitySensor from 'react-visibility-sensor'
+import { Box, Grow, Grid, Link, Paper, Typography } from '@material-ui/core'
 import useGithubRepos from './useGithubRepos'
 
 const StyledPaper = styled(Paper)`
@@ -49,34 +49,38 @@ RepositoryCard.propTypes = {
 
 const Projects = () => {
   const repos = useGithubRepos()
-  const transitions = useTransition(repos, item => item.name, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    trail: 100,
-  })
+  const [grow, setGrow] = useState(false)
+
+  const toggleGrow = isVisible => {
+    setGrow(isVisible)
+  }
 
   return (
     <StyledGrid container spacing={3} justify="space-evenly">
       <Grid item xs={12}>
         <Typography variant="h2" color="primary" align="center">
-          Projects
+          Personal Projects
         </Typography>
       </Grid>
-      {transitions.map(({ item: { name, description, url }, key, props }) => (
-        <Grid key={key} item xs={12} sm={6} md={4}>
-          <animated.div
-            data-testid={`projects-animated-div-${key}`}
-            style={props}
-          >
-            <RepositoryCard
-              style={props}
-              name={name}
-              description={description}
-              url={url}
-            />
-          </animated.div>
+      <VisibilitySensor
+        partialVisibility
+        minTopValue={60}
+        onChange={toggleGrow}
+      >
+        <Grid container spacing={3}>
+          {repos.map(({ name, description, url }, i) => (
+            <Grow key={name} in={grow} timeout={500 + i * 300}>
+              <Grid data-testid="projects-cards" item xs={12} sm={6} md={4}>
+                <RepositoryCard
+                  name={name}
+                  description={description}
+                  url={url}
+                />
+              </Grid>
+            </Grow>
+          ))}
         </Grid>
-      ))}
+      </VisibilitySensor>
     </StyledGrid>
   )
 }
